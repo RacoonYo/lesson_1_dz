@@ -37,12 +37,34 @@ def one_cycle_realisation(duration):
     Переменная total_time - строковая переменная,
     содержащая в себе промежуток времени в нужно формате
     """
+    days = 0
+    hours = 0
+    minutes = 0
+    seconds = 0
 
-    # YOUR CODE HERE
+    for i in range(duration + 1):
+        seconds = duration % 86400 % 3600 % 60
+        if i >= 60:
+            if i % 60 == 0:
+                minutes += 1
+                seconds = 0
+                if minutes == 60:
+                    hours += 1
+                    minutes = 0
+                    if hours == 24:
+                        days += 1
+                        hours = 0
+            total_time = f'{minutes} мин {seconds} cek'
+        else:
+            total_time = f'{seconds} сек'
+        if i >= 3600:
+            total_time = f'{hours} час {minutes} мин {seconds} cek'
+        if i >= 86400:
+            total_time = f'{days} дн {hours} час {minutes} мин {seconds} cek'
     return total_time
 
 
 if __name__ == '__main__':
-    duration = 360200
+    duration = 25
     print(naive_realisation(duration))
     print(one_cycle_realisation(duration))
